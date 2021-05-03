@@ -5,14 +5,14 @@ class Allcourses(models.Model):
     insname = models.CharField(max_length=100)
 
     def __str__(self):
-        return  self.coursename
+        return self.coursename
 
 class Details(models.Model):
     course =models.ForeignKey(Allcourses, on_delete= models.CASCADE)
     sp = models.CharField(max_length=500)
     il = models.CharField(max_length=500)
     def __str__(self):
-        return  self.sp
+        return  str(self.pk)
 
 
 

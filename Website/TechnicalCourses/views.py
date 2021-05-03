@@ -1,10 +1,22 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, Http404
+from.models import Allcourses
+from django.template import loader
+def Courses(request):
+    ac = Allcourses.objects.all()
+    template = loader.get_template('TechnicalCourses/Courses.html')
+    context={
+        'ac': ac,
 
-def Courses(reques):
-    return HttpResponse('<h1>This is my Home Page</h1>')
+    }
+    return HttpResponse(template.render(context,request))
 
 def Details(request,course_id):
-    return HttpResponse('<h2>These are course details for course_id:' + str(course_id)+'</h2>')
+    try:
+        course=Allcourses.objects.get(pk=course_id)
+    except Allcourses.DoesNotExist:
+        raise Http404("course not avaible")
+
+    return render(request,'TechnicalCourses/Details.html',{'course': course})
 
 
