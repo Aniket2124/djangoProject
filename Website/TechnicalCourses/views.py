@@ -7,7 +7,6 @@ def Courses(request):
     template = loader.get_template('TechnicalCourses/Courses.html')
     context={
         'ac': ac,
-
     }
     return HttpResponse(template.render(context,request))
 
